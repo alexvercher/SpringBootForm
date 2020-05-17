@@ -3,7 +3,7 @@ package com.avc.springboot.form.app.models.domain;
 import java.util.Date;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Future;
+//import javax.validation.constraints.Future;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -13,7 +13,7 @@ import javax.validation.constraints.Past;
 //import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import org.springframework.format.annotation.DateTimeFormat;
+//import org.springframework.format.annotation.DateTimeFormat;
 
 import com.avc.springboot.form.app.validation.IdentificadorRegex;
 import com.avc.springboot.form.app.validation.Requerido;
@@ -47,18 +47,19 @@ public class Usuario {
 	@Min(5)
 	@Max(5000)
 	private Integer cuenta;
-	
-	@NotNull
-	@Future
-	//@Past
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date fechaNacimiento;
-	
 	/*
 	@Min(value = 1)
 	private int cuenta;
 	*/
 	
+	@NotNull
+	//@Future
+	@Past
+	//@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date fechaNacimiento;
+	
+	@NotEmpty
+	private String pais;
 	
 	public String getId() {
 		return id;
@@ -122,6 +123,14 @@ public class Usuario {
 
 	public void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
+	}
+
+	public String getPais() {
+		return pais;
+	}
+
+	public void setPais(String pais) {
+		this.pais = pais;
 	}
 	
 }

@@ -1,22 +1,30 @@
 package com.avc.springboot.form.app.controllers;
 
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+
 //import java.util.HashMap;
 //import java.util.Map;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 //import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import com.avc.springboot.form.app.editors.NombreMayusculaEditor;
 import com.avc.springboot.form.app.models.domain.Usuario;
 import com.avc.springboot.form.app.validation.UsuarioValidador;
 
@@ -30,6 +38,16 @@ public class FormController {
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		binder.addValidators(validador);
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		dateFormat.setLenient(false);
+		//binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
+		binder.registerCustomEditor(Date.class, "fechaNacimiento" ,new CustomDateEditor(dateFormat, false));
+		binder.registerCustomEditor(String.class, new NombreMayusculaEditor());
+	}
+	
+	@ModelAttribute("paises")
+	public List<String> paises(){
+		return Arrays.asList("España", "Mexico", "Chile", "Colombia", "Venezuela");
 	}
 	
 	@GetMapping("/form")
