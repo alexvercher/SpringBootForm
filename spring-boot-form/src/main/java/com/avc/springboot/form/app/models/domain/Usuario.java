@@ -1,7 +1,9 @@
 package com.avc.springboot.form.app.models.domain;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
 //import javax.validation.constraints.Future;
 import javax.validation.constraints.Max;
@@ -58,8 +60,21 @@ public class Usuario {
 	//@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fechaNacimiento;
 	
+	//@Valid
+	@NotNull
+	private Pais pais;
+	
 	@NotEmpty
-	private String pais;
+	List<Role> roles;
+	
+	private boolean habilitar;
+	
+	@NotEmpty
+	private String genero;
+	
+	
+	private String valorSecreto;
+	
 	
 	public String getId() {
 		return id;
@@ -125,12 +140,44 @@ public class Usuario {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
-	public String getPais() {
+	public Pais getPais() {
 		return pais;
 	}
 
-	public void setPais(String pais) {
+	public void setPais(Pais pais) {
 		this.pais = pais;
+	}
+
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
+
+	public boolean isHabilitar() {
+		return habilitar;
+	}
+
+	public void setHabilitar(boolean habilitar) {
+		this.habilitar = habilitar;
+	}
+
+	public String getGenero() {
+		return genero;
+	}
+
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
+
+	public String getValorSecreto() {
+		return valorSecreto;
+	}
+
+	public void setValorSecreto(String valorSecreto) {
+		this.valorSecreto = valorSecreto;
 	}
 	
 }
